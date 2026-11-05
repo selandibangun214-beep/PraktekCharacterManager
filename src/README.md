@@ -167,3 +167,148 @@ https://docs.google.com/document/d/1sAtDeQZZj2kVs94TOLaSVdip59FUTPXp7M2KCwu-RXQ/
 
 Melalui proyek ini, konsep OOP dan pemisahan tanggung jawab diterapkan dalam pengembangan aplikasi Java Swing. Penggunaan AppTheme dan MainWindow membuat tampilan lebih konsisten, sedangkan CharacterManager membantu mengelola data karakter secara terpisah. Proyek ini dapat dikembangkan lebih lanjut dengan fitur pencarian, pengeditan, penghapusan, dan penyimpanan data karakter.
 
+
+# Character Manager
+
+Aplikasi desktop Java Swing untuk mengelola dan menampilkan
+karakter dengan konsep Object-Oriented Programming dan MVC.
+
+## Teknologi
+
+- Java
+- Java Swing
+- VS Code
+- Git dan GitHub
+
+## Struktur Project
+
+```text
+src/
+└── com/unpri/charactermanager/
+    ├── Main.java
+    ├── model/
+    │   ├── Character.java
+    │   ├── CharacterType.java
+    │   └── CharacterManager.java
+    └── view/
+        ├── AppTheme.java
+        └── MainWindow.java
+```
+
+# TP12 - MainWindow v0.5
+## A. Implementasi Layout
+
+Pada TP12, aplikasi Character Manager dikembangkan
+menggunakan BorderLayout dengan empat wilayah utama.
+
+1. NORTH: Header dan panel statistik.
+2. CENTER: Daftar karakter menggunakan JScrollPane.
+3. EAST: Legenda role karakter.
+4. SOUTH: Bar status dan versi aplikasi.
+
+Legenda menggunakan BoxLayout dengan arah Y_AXIS.
+Daftar karakter menggunakan GridLayout pada panel
+pembungkus yang dimasukkan ke JScrollPane.
+
+## B. Wireframe
+
+```text
++------------------------------------------------------+
+|                    HEADER (NORTH)                    |
+|                 CHARACTER MANAGER                    |
+|  Total Karakter | Rata-rata | Jenis Role | Version   |
++--------------------------------------+---------------+
+|                                      |               |
+|             CHARACTER LIST          |    LEGENDA    |
+|                                      |               |
+|    +----------------+                |   WARRIOR     |
+|    | Arka           |                |               |
+|    +----------------+                |   MAGE        |
+|    +----------------+                |               |
+|    | Luna           |                |   ARCHER      |
+|    +----------------+                |               |
+|                                      |               |
+|             SCROLL PANE              |               |
++--------------------------------------+---------------+
+| STATUS BAR                | v0.5                     |
++------------------------------------------------------+
+```
+
+## C. Screenshot Pengujian
+
+### 1. Ukuran Awal
+
+![Screenshot ukuran awal](![alt text](awal.png))
+
+### 2. Jendela Dilebarkan
+
+![Screenshot jendela lebar](![alt text](lebar.png))
+
+### 3. Jendela Dikecilkan
+
+![Screenshot jendela kecil](![alt text](kecil.png))
+
+## D. Tabel Pengamatan Resize
+
+| Pengujian | Prediksi | Hasil Pengamatan |
+|---|---|---|
+| Ukuran awal | Semua wilayah terlihat | Isi aplikasi terlihat |
+| Jendela dilebarkan | Area CENTER bertambah luas | Kartu memperoleh ruang lebih luas |
+| Jendela dikecilkan | Scrollbar muncul jika konten tidak muat | Daftar tetap dapat digulir |
+
+## E. Struktur Panel Bersarang
+
+Aplikasi menggunakan JFrame sebagai jendela utama
+dengan BorderLayout sebagai pengatur wilayah.
+
+Panel header memiliki panel statistik tambahan
+yang menggunakan GridLayout 2x2.
+
+Panel daftar karakter memiliki panel pembungkus
+yang berisi kartu karakter dengan GridLayout.
+Panel pembungkus tersebut dimasukkan ke JScrollPane.
+
+Panel legenda menggunakan BoxLayout Y_AXIS,
+sedangkan status bar menggunakan BorderLayout.
+
+## F. Alasan Pemilihan Layout
+
+BorderLayout dipilih karena dapat membagi jendela
+menjadi empat wilayah dengan fungsi berbeda.
+
+GridLayout dipilih untuk menyusun kartu karakter
+dalam dua kolom dengan ukuran sel seragam.
+GridLayout juga dipilih untuk panel statistik karena
+empat informasi perlu disusun dalam bentuk 2x2.
+
+BoxLayout Y_AXIS dipilih untuk legenda karena setiap
+jenis role ditampilkan secara vertikal.
+
+FlowLayout tidak dipilih sebagai layout utama kartu
+karena tidak menyediakan susunan kolom tetap.
+GridBagLayout juga tidak dipilih karena lebih kompleks
+daripada kebutuhan tampilan aplikasi ini.
+
+## G. Panel Tambahan
+
+Panel statistik ditambahkan di bawah judul header.
+Panel tersebut menampilkan total karakter, rata-rata
+level, jumlah jenis role, dan versi layout.
+
+GridLayout 2x2 dipilih agar informasi tersusun rapi
+dan memiliki ukuran komponen yang seragam.
+
+## H. Google Docs - Analisis Layout dan MVC
+
+[https://docs.google.com/document/d/1wzwY4Nb6lGt1-lEcdQkpbOorD-w5GN2o1tenkKQa2E8/edit?usp=sharing]
+
+## I. Kesimpulan
+
+Pada TP12, aplikasi Character Manager menggunakan
+Layout Manager agar tampilannya dapat menyesuaikan
+ukuran jendela.
+
+Penggunaan BorderLayout, GridLayout, BoxLayout,
+dan JScrollPane membuat susunan komponen lebih teratur.
+Pengujian resize dilakukan dalam tiga ukuran jendela
+untuk mengamati perubahan tampilan aplikasi.

@@ -1,10 +1,11 @@
+
 package com.unpri.charactermanager;
 
 import javax.swing.SwingUtilities;
 
 import com.unpri.charactermanager.model.Character;
-import com.unpri.charactermanager.model.CharacterType;
 import com.unpri.charactermanager.model.CharacterManager;
+import com.unpri.charactermanager.model.CharacterType;
 import com.unpri.charactermanager.view.MainWindow;
 
 public class Main {
@@ -15,39 +16,43 @@ public class Main {
 
             CharacterManager manager = new CharacterManager();
 
+            // Menambahkan 8 karakter
+
             manager.addCharacter(
-                    new Character("Regnar", 10, CharacterType.WARRIOR)
+                    new Character("Arka", 10, CharacterType.WARRIOR)
             );
 
             manager.addCharacter(
-                    new Character("Arka", 15, CharacterType.WARRIOR)
+                    new Character("Luna", 15, CharacterType.MAGE)
             );
 
             manager.addCharacter(
-                    new Character("Luna", 3, CharacterType.MAGE)
+                    new Character("Raka", 3, CharacterType.ARCHER)
             );
 
             manager.addCharacter(
-                    new Character("Raka", 5, CharacterType.WARRIOR)
+                    new Character("Nara", 5, CharacterType.MAGE)
             );
 
             manager.addCharacter(
-                    new Character("Nara", 2, CharacterType.HEALER)
+                    new Character("Kirana", 8, CharacterType.WARRIOR)
             );
 
             manager.addCharacter(
-                    new Character("Kirana", 7, CharacterType.ARCHER)
-            );
-
-            manager.addCharacter(
-                    new Character("Bima", 7, CharacterType.WARRIOR)
+                    new Character("Bima", 2, CharacterType.ARCHER)
             );
 
             manager.addCharacter(
                     new Character("Maya", 7, CharacterType.MAGE)
             );
 
+            manager.addCharacter(
+                    new Character("Damar", 12, CharacterType.WARRIOR)
+            );
+
+            // Menampilkan GUI
             MainWindow window = new MainWindow(manager);
+
             window.setVisible(true);
         });
     }
