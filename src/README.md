@@ -312,3 +312,100 @@ Penggunaan BorderLayout, GridLayout, BoxLayout,
 dan JScrollPane membuat susunan komponen lebih teratur.
 Pengujian resize dilakukan dalam tiga ukuran jendela
 untuk mengamati perubahan tampilan aplikasi.
+
+
+# TP14 — Form & Input Validation
+
+## A. Implementasi Form
+
+TP14 mengembangkan aplikasi Character Manager dengan
+menambahkan CharacterFormPanel.
+
+Komponen yang digunakan:
+
+- JTextField untuk memasukkan nama karakter.
+- JComboBox untuk memilih role karakter.
+- JSpinner untuk memasukkan level 1–99.
+- JLabel untuk menampilkan pesan validasi.
+
+Validasi nama dilakukan secara berurutan:
+1. Kelengkapan nama.
+2. Panjang nama maksimal 20 karakter.
+3. Format nama.
+4. Keunikan nama.
+
+Input nama dibersihkan menggunakan trim().
+
+## B. Validasi Model
+
+Model memiliki tanggung jawab menjaga aturan bisnis.
+
+Aturan yang diterapkan:
+
+1. Nama tidak boleh kosong.
+2. Nama maksimal 20 karakter.
+3. Role tidak boleh null.
+4. Level harus 1–99.
+5. MAGE tidak boleh memiliki level di atas 60.
+
+CharacterManager juga menerapkan:
+- Nama karakter harus unik.
+- Jumlah karakter maksimal 20.
+- getAllCharacters() mengembalikan salinan daftar.
+
+## C. Validasi Tambahan
+
+| Aturan | Lapisan | Alasan |
+|---|---|---|
+| Tidak boleh ada spasi ganda | View | Meningkatkan kualitas input pengguna |
+| Maksimal 20 karakter dalam daftar | Model/Manager | Melindungi data dari semua sumber input |
+
+## D. Tabel Pengujian
+
+| No | Input | Hasil Diharapkan | Hasil Nyata | Lapisan |
+|---|---|---|---|---|
+| 1 | Nama kosong | Pesan nama wajib diisi | Isi setelah tes | View |
+| 2 | Nama Regnar (duplikat) | Nama sudah digunakan | Isi setelah tes | View |
+| 3 | Nama dengan angka | Format ditolak | Isi setelah tes | View |
+| 4 | Nama dengan spasi ganda | Format ditolak | Isi setelah tes | View |
+| 5 | Nama lebih dari 20 karakter | Ditolak | Isi setelah tes | View |
+| 6 | MAGE level 61 | Ditolak | Isi setelah tes | Model |
+| 7 | WARRIOR level 99 | Berhasil ditambahkan | Isi setelah tes | Model |
+| 8 | Level 100 | Ditolak | Isi setelah tes | Model |
+| 9 | Role null | Ditolak | Isi setelah tes | Model |
+| 10 | Karakter ke-21 | Ditolak | Isi setelah tes | Manager |
+
+Catatan:
+Hasil nyata diisi berdasarkan pengujian langsung aplikasi.
+Jika berbeda dari hasil yang diharapkan, periksa pesan error,
+perbaiki kode pada lapisan yang bertanggung jawab,
+kemudian ulangi pengujian.
+
+## E. Screenshot
+
+### 1. Error Nama Kosong
+[![alt text](<Screenshot 2026-11-19 154944.png>)]
+
+### 2. Error Nama Duplikat
+[![alt text](<Screenshot 2026-11-19 155055.png>)]
+
+### 3. Sukses Menambahkan Karakter
+[![alt text](<Screenshot 2026-11-19 155207.png>)]
+
+## F. Kompromi Sementara
+
+Pada sprint ini, ActionListener masih digunakan
+dengan implementasi minimal untuk menangani tombol tambah.
+View juga memanggil CharacterManager secara langsung
+agar proses penambahan karakter dapat berjalan dengan sederhana.
+Pendekatan ini mempermudah integrasi awal, tetapi membuat
+ketergantungan antara View dan Manager masih cukup kuat.
+Pada pertemuan berikutnya, pemisahan tanggung jawab
+diharapkan membuat struktur aplikasi lebih terorganisasi.
+
+## G. Analisis Input dan Validasi
+
+Dokumen Google Docs:
+[https://docs.google.com/document/d/116-XuhTapk8TRVS2xb-AXA_aJhApW_YuGQIhQ7DpDDA/edit?usp=sharing]
+
+

@@ -1,36 +1,52 @@
+
 package com.unpri.charactermanager.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CharacterManager {
 
-    private final ArrayList<Character> characters = new ArrayList<>();
+    private final List<Character> characters = new ArrayList<>();
 
-    // Menambahkan karakter dan menolak nama duplikat
-    public boolean addCharacter(Character character) {
+    public void addCharacter(Character character) {
 
-        if (character == null || character.getName() == null) {
-            return false;
+        if (character == null) {
+            throw new IllegalArgumentException(
+                "Karakter tidak boleh null."
+            );
         }
 
-        if (findByName(character.getName()) != null) {
-            return false;
+        if (isNameTaken(character.getName())) {
+            throw new IllegalArgumentException(
+                "Nama karakter sudah digunakan."
+            );
+        }
+
+        if (characters.size() >= 20) {
+            throw new IllegalArgumentException(
+                "Jumlah karakter maksimal 20."
+            );
         }
 
         characters.add(character);
-        return true;
     }
 
-    // Mencari karakter berdasarkan nama
-    public Character findByName(String name) {
+    public boolean isNameTaken(String name) {
 
         if (name == null) {
-            return null;
+            return false;
         }
 
+        return characters.stream().anyMatch(
+            character -> character.getName()
+                .equalsIgnoreCase(name.trim())
+        );
+    }
+
+    public Character findByName(String name) {
+
         for (Character character : characters) {
-            if (character.getName() != null
-                    && character.getName().equalsIgnoreCase(name)) {
+            if (character.getName().equalsIgnoreCase(name)) {
                 return character;
             }
         }
@@ -38,34 +54,25 @@ public class CharacterManager {
         return null;
     }
 
-    // Menghapus karakter berdasarkan nama
     public boolean removeCharacter(String name) {
 
-        Character character = findByName(name);
-
-        if (character == null) {
-            return false;
-        }
-
-        characters.remove(character);
-        return true;
+        return characters.removeIf(
+            character -> character.getName().equalsIgnoreCase(name)
+        );
     }
 
-    // Menghitung jumlah karakter
     public int getTotalCharacters() {
         return characters.size();
     }
 
-    // Mengembalikan salinan daftar karakter (defensive copy)
-    public ArrayList<Character> getAllCharacters() {
+    public List<Character> getAllCharacters() {
         return new ArrayList<>(characters);
     }
 
-    // Menghitung rata-rata level karakter
     public double getAverageLevel() {
 
         if (characters.isEmpty()) {
-            return 0.0;
+            return 0;
         }
 
         int total = 0;
@@ -75,41 +82,5 @@ public class CharacterManager {
         }
 
         return (double) total / characters.size();
-    }
-
-    // Mencari karakter berdasarkan tipe
-    public ArrayList<Character> findByType(CharacterType type) {
-
-        ArrayList<Character> result = new ArrayList<>();
-
-        if (type == null) {
-            return result;
-        }
-
-        for (Character character : characters) {
-            if (character.getType() == type) {
-                result.add(character);
-            }
-        }
-
-        return result;
-    }
-
-    // Menghitung jumlah karakter berdasarkan tipe
-    public int countByType(CharacterType type) {
-
-        int count = 0;
-
-        if (type == null) {
-            return count;
-        }
-
-        for (Character character : characters) {
-            if (character.getType() == type) {
-                count++;
-            }
-        }
-
-        return count;
     }
 }

@@ -1,12 +1,12 @@
 
 package com.unpri.charactermanager;
 
-import javax.swing.SwingUtilities;
-
 import com.unpri.charactermanager.model.Character;
 import com.unpri.charactermanager.model.CharacterManager;
 import com.unpri.charactermanager.model.CharacterType;
 import com.unpri.charactermanager.view.MainWindow;
+
+import javax.swing.SwingUtilities;
 
 public class Main {
 
@@ -16,41 +16,27 @@ public class Main {
 
             CharacterManager manager = new CharacterManager();
 
-            // Menambahkan 8 karakter
-
+            // Data awal
             manager.addCharacter(
-                    new Character("Arka", 10, CharacterType.WARRIOR)
+                new Character("Regnar", CharacterType.WARRIOR, 10)
             );
 
             manager.addCharacter(
-                    new Character("Luna", 15, CharacterType.MAGE)
+                new Character("Elara", CharacterType.MAGE, 15)
             );
 
             manager.addCharacter(
-                    new Character("Raka", 3, CharacterType.ARCHER)
+                new Character("Kael", CharacterType.ARCHER, 8)
             );
 
             manager.addCharacter(
-                    new Character("Nara", 5, CharacterType.MAGE)
+                new Character("Freya", CharacterType.MAGE, 12)
             );
 
             manager.addCharacter(
-                    new Character("Kirana", 8, CharacterType.WARRIOR)
+                new Character("Arden", CharacterType.WARRIOR, 2)
             );
 
-            manager.addCharacter(
-                    new Character("Bima", 2, CharacterType.ARCHER)
-            );
-
-            manager.addCharacter(
-                    new Character("Maya", 7, CharacterType.MAGE)
-            );
-
-            manager.addCharacter(
-                    new Character("Damar", 12, CharacterType.WARRIOR)
-            );
-
-            // Menampilkan GUI
             MainWindow window = new MainWindow(manager);
 
             window.setVisible(true);

@@ -1,47 +1,62 @@
+
 package com.unpri.charactermanager.model;
 
 import java.util.Objects;
 
 public class Character {
+
     private String name;
-    private int level;
     private CharacterType type;
+    private int level;
 
-    private static int totalCharacterCreated = 0;
+    public Character(String name, CharacterType type, int level) {
 
-    public Character(String name, int level, CharacterType type) {
-        this.name = name;
-        this.level = level;
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException(
+                "Nama karakter tidak boleh kosong."
+            );
+        }
+
+        if (name.length() > 20) {
+            throw new IllegalArgumentException(
+                "Nama karakter maksimal 20 karakter."
+            );
+        }
+
+        if (type == null) {
+            throw new IllegalArgumentException(
+                "Role karakter harus dipilih."
+            );
+        }
+
+        if (level < 1 || level > 99) {
+            throw new IllegalArgumentException(
+                "Level harus berada antara 1 sampai 99."
+            );
+        }
+
+        // Aturan bisnis khusus MAGE
+        if (type == CharacterType.MAGE && level > 60) {
+            throw new IllegalArgumentException(
+                "MAGE tidak boleh memiliki level di atas 60."
+            );
+        }
+
+        this.name = name.trim();
         this.type = type;
-        totalCharacterCreated++;
+        this.level = level;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
     public CharacterType getType() {
         return type;
     }
 
-    public void setType(CharacterType type) {
-        this.type = type;
-    }
-
-    public static int getTotalCharacterCreated() {
-        return totalCharacterCreated;
+    public int getLevel() {
+        return level;
     }
 
     @Override
@@ -56,20 +71,11 @@ public class Character {
 
         Character other = (Character) obj;
 
-        return name != null
-                && other.name != null
-                && name.equalsIgnoreCase(other.name);
+        return name.equalsIgnoreCase(other.name);
     }
 
     @Override
     public int hashCode() {
-        return name == null ? 0 : name.toLowerCase().hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return "Character{name='" + name
-                + "', level=" + level
-                + ", type=" + type + "}";
+        return Objects.hash(name.toLowerCase());
     }
 }
